@@ -82,7 +82,6 @@ class ListaAlumnos{
 		}
 		System.out.println("Lista de alumnos que se inscribieron a la carrera "+carrera);
 		for (Entry<Integer, Alumno> alum : mapa.entrySet()) {
-			System.out.println(alum);
 			if(alum.getValue().getCarrera().equalsIgnoreCase("ISC") && op==1) {
 				System.out.println(alum.getValue().getNombre());
 			}else if(alum.getValue().getCarrera().equalsIgnoreCase("IIA") &&op==2) {
@@ -95,6 +94,13 @@ class ListaAlumnos{
 				System.out.println(alum.getValue().getNombre());
 			}
 		}
+	}//clase
+	public double promedioEdades() {
+		double suma=0.0;
+		for (Entry<Integer, Alumno> alum : mapa.entrySet()) {
+			suma=suma+alum.getValue().getEdad();
+		}
+		return suma/mapa.size();
 	}
 	
 }
@@ -137,7 +143,7 @@ public class PruebaHashMap {
 			entrada.nextLine();
 			break;
 		case "D":
-			
+			System.out.println("El promedio de las edades es: "+map.promedioEdades());
 			break;
 		case "E":
 			
