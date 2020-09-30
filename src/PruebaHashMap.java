@@ -118,7 +118,7 @@ class ListaAlumnos{
 		for (Entry<Integer, Alumno> alum : mapa.entrySet()) {
 			try {
 				Date fecha=formato.parse(alum.getValue().getFechaInscripcion());
-				if(fecha.before(comparar)==true) {
+				if(fecha.before(comparar)==false) {
 					System.out.println(alum.getValue().getNombre());
 				}
 			} catch (ParseException e) {
@@ -162,9 +162,14 @@ public class PruebaHashMap {
 			System.out.println("3) IM");
 			System.out.println("4) LA");
 			System.out.println("5) CP");
+			try {
 			op2=entrada.nextInt();
 			map.mostrarAlumnosCarrera(op2);
 			entrada.nextLine();
+			}catch (NumberFormatException e) {
+				System.out.println("No ingresaste un numero entero");
+				System.out.println("Seras enviado al menu principal");
+			}
 			break;
 		case "D":
 			System.out.println("El promedio de las edades es: "+map.promedioEdades());
@@ -174,6 +179,7 @@ public class PruebaHashMap {
 			break;
 		case "F":
 			System.out.println("Saliendo....");
+			break;
 		default:
 			System.out.println("Ingresa una opcion valida");
 			break;
