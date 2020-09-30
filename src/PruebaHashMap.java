@@ -1,3 +1,6 @@
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -61,7 +64,7 @@ class ListaAlumnos{
 		int edad=entrada.nextInt();
 		entrada.nextLine();
 		System.out.println("Carrea del alumno:");
-		String carrera=entrada.nextLine();
+		String carrera=entrada.nextLine().toUpperCase().replace(" ","");
 		System.out.println("Fecha de inscripcion en formato dd/mm/aaaa");
 		String fecha=entrada.nextLine();
 		Alumno alumno=new Alumno(nom, edad, carrera, fecha);
@@ -102,7 +105,28 @@ class ListaAlumnos{
 		}
 		return suma/mapa.size();
 	}
-	
+	public void mostrarAlumnosInscritosdespuesFecha() {
+		SimpleDateFormat formato=new SimpleDateFormat("dd/mm/yyyy");
+		Date comparar = null;
+		try {
+			comparar = formato.parse("10/08/2016");
+		} catch (ParseException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		System.out.println("Alumnos que se inscribieron despues de: 10/08/2016 ");
+		for (Entry<Integer, Alumno> alum : mapa.entrySet()) {
+			try {
+				Date fecha=formato.parse(alum.getValue().getFechaInscripcion());
+				if(fecha.before(comparar)==true) {
+					System.out.println(alum.getValue().getNombre());
+				}
+			} catch (ParseException e) {
+				
+			}
+			
+		}
+	}
 }
 public class PruebaHashMap {
 
@@ -146,14 +170,14 @@ public class PruebaHashMap {
 			System.out.println("El promedio de las edades es: "+map.promedioEdades());
 			break;
 		case "E":
-			
+			map.mostrarAlumnosInscritosdespuesFecha();
 			break;
 		case "F":
 			System.out.println("Saliendo....");
 		default:
 			System.out.println("Ingresa una opcion valida");
 			break;
-		}
+			}
 		}while(!op.equalsIgnoreCase("F"));
 
 	}
